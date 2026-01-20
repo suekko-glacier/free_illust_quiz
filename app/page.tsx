@@ -154,22 +154,6 @@ export default function QuizPage() {
           <div className="content col-span-3 flex flex-col justify-center gap-2">
             <button
               onClick={() => {
-                initialize_game(1);
-              }}
-              className="bg-red-500 font-bold text-white py-2 rounded hover:bg-red-700"
-            >
-              モンスターボール級
-            </button>
-            <button
-              onClick={() => {
-                initialize_game(2);
-              }}
-              className="bg-blue-500 font-bold text-white py-2 rounded hover:bg-blue-700"
-            >
-              スーパーボール級
-            </button>
-            <button
-              onClick={() => {
                 initialize_game(3);
               }}
               className="bg-yellow-500 font-bold text-white py-2 rounded hover:bg-yellow-700"
