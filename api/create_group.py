@@ -55,7 +55,7 @@ def create_group():
     print("Got config as follows:")
     print(config_list)
 
-    file_path = os.path.join(os.path.dirname(__file__), "..", "public", "data", "pokemon_data.jsonl")
+    file_path = os.path.join(os.path.dirname(__file__), "..", "public", "data", "irasutoya_data.jsonl")
     with open(file_path, "r") as f:
         raw_data = [json.loads(l) for l in f.readlines()]
 

@@ -37,7 +37,7 @@ export default function QuizPage() {
   
     const shuffled = parsed.sort(() => 0.5 - Math.random());
       setAllQuizData(parsed);
-      setQuizList(shuffled.slice(0, 10));
+      setQuizList(shuffled.slice(0, Math.min(10, parsed.length)));
   }
 
   const initialize_game = (difficulty: number) => {
@@ -190,7 +190,7 @@ export default function QuizPage() {
             <button
               onClick={() => {
                 const reshuffled = [...allQuizData].sort(() => 0.5 - Math.random());
-                setQuizList(reshuffled.slice(0, 10));
+                setQuizList(reshuffled.slice(0, Math.min(10, allQuizData.length)));
                 setCurrentIndex(0);
                 setResult(null);
                 setShowAnswer(false);
@@ -209,7 +209,7 @@ export default function QuizPage() {
       return (
         <div className="grid grid-rows-20 h-[calc(80vh)] flex items-center justify-center">
           <div className="row-span-2 w-full max-w-md text-center">
-            <h1 className="text-xl font-bold mt-4"> {currentIndex + 1} / 10</h1>
+            <h1 className="text-xl font-bold mt-4"> {currentIndex + 1} / {quizList.length}</h1>
             {/* <progress
               value={(currentIndex + 1) / 10}
               className='rounded-full bg-black'
@@ -300,7 +300,7 @@ export default function QuizPage() {
                     onClick={handleNext}
                     className="row-span-1 mt-4 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 mx-auto"
                   >
-                    {currentIndex < 10 - 1 ? '次の問題へ' : '結果を見る'}
+                    {currentIndex < quizList.length - 1 ? '次の問題へ' : '結果を見る'}
                   </button>
                 <div className='h-[calc(100vh/5)] row-span-4 max-w-md mx-auto'>
                   <img
