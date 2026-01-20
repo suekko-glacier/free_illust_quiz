@@ -34,40 +34,17 @@ export default function QuizPage() {
     const parsed: QuizItem[] = lines.map((line) => JSON.parse(line));
 
     setNameList(parsed.map(p => p.name));
-  
-    const shuffled = parsed.sort(() => 0.5 - Math.random());
-      setAllQuizData(parsed);
-      setQuizList(shuffled.slice(0, Math.min(10, parsed.length)));
+    setAllQuizData(parsed);
   }
 
   const initialize_game = (difficulty: number) => {
     setDifficulty(difficulty);
     setScore(0);
-    setScene("load");
-  }
-
-  const fetchData = async () => {
-    //選択肢あり
-    const configStr = (difficulty === 3) ? `` 
-    //選択肢なし
-      : (difficulty === 4) ? ``
-      : ``;
-
-    try {
-      const res = await fetch(`/api/create_group`,{
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ config: configStr }),
-      });
-      
-      const data = await res.text();
-      parse_jsonl(data);
-    } catch (err) {
-      console.error(err);
-    }
+    const reshuffled = [...allQuizData].sort(() => 0.5 - Math.random());
+    setQuizList(reshuffled.slice(0, Math.min(10, allQuizData.length)));
+    setCurrentIndex(0);
     setScene("game");
   }
-  
 
   // ひらがなtoカタカナ
   const toKatakana = (str: string) =>
@@ -173,13 +150,6 @@ export default function QuizPage() {
     </div>
 
       )
-    case "load": 
-      fetchData();
-      return (
-        <div className="w-screenflex items-center justify-center">
-          <div>読み込み中...</div>
-        </div>);
-
     case "game": 
       if (currentIndex >= quizList.length) {
         return (
