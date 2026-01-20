@@ -279,13 +279,6 @@ export default function QuizPage() {
                   >
                     {currentIndex < quizList.length - 1 ? '次の問題へ' : '結果を見る'}
                   </button>
-                <div className='h-[calc(100vh/5)] row-span-4 max-w-md mx-auto'>
-                  <img
-                    src={`/irasutoya_images/${current.image}`}
-                    alt={`正解画像 ${currentIndex + 1}`}
-                    className="h-full object-contain  mx-auto"
-                  />
-                </div>
 
                   <div className="row-span-2 text-left space-y-1 mx-auto">
                     <p><strong>名前:</strong> {getFullName(current)}</p>                  
