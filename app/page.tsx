@@ -10,7 +10,7 @@ type QuizItem = {
 
 
 export default function QuizPage() {
-  const [scene, setScene] = useState("title");
+  const [scene, setScene] = useState("loading");
   const [difficulty, setDifficulty] = useState(0);
 
   const [options, setOptionss] = useState([true, true]);
@@ -55,9 +55,10 @@ export default function QuizPage() {
   const getFullName = (p: QuizItem) => p.name;
 
   useEffect(() => {
-    fetch('/data/irasutoya.jsonl')
+    fetch('/data/irasutoya_data.jsonl')
     .then((res) => res.text())
-    .then(parse_jsonl);
+    .then(parse_jsonl)
+    .then(() => setScene("title"));
   }, []);
 
 
@@ -118,6 +119,12 @@ export default function QuizPage() {
   };
 
   switch(scene) {
+    case "loading":
+      return (
+        <div className="w-screen h-screen flex items-center justify-center">
+          <div>読み込み中...</div>
+        </div>
+      );
     case "title":
       return (
         
@@ -274,7 +281,7 @@ export default function QuizPage() {
                   </button>
                 <div className='h-[calc(100vh/5)] row-span-4 max-w-md mx-auto'>
                   <img
-                    src={`/pokemon_images/${current.image}`}
+                    src={`/irasutoya_images/${current.image}`}
                     alt={`正解画像 ${currentIndex + 1}`}
                     className="h-full object-contain  mx-auto"
                   />
