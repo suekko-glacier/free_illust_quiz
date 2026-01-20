@@ -12,7 +12,6 @@ type QuizItem = {
 export default function QuizPage() {
   const [scene, setScene] = useState("title");
   const [difficulty, setDifficulty] = useState(0);
-  const [showCustomModal,setShowCustomModal] = useState(false);
 
   const [options, setOptionss] = useState([true, true]);
   
@@ -33,6 +32,8 @@ export default function QuizPage() {
   const parse_jsonl = (text: string) => {
     const lines = text.trim().split('\n');
     const parsed: QuizItem[] = lines.map((line) => JSON.parse(line));
+
+    setNameList(parsed.map(p => p.name));
   
     const shuffled = parsed.sort(() => 0.5 - Math.random());
       setAllQuizData(parsed);
@@ -42,11 +43,7 @@ export default function QuizPage() {
   const initialize_game = (difficulty: number) => {
     setDifficulty(difficulty);
     setScore(0);
-    if(difficulty === 5) {
-      setShowCustomModal(true);
-    } else {
-      setScene("load");
-    }
+    setScene("load");
   }
 
   const fetchData = async () => {
