@@ -271,7 +271,7 @@ export default function QuizPage() {
             ) : (
               <div className='h-[calc(100vh/2)] grid grid-rows-8 flex items-center justify-center'>
                 <span className={`row-span-1 font-bold ${result === 'correct' ? 'text-green-600' : 'text-red-600'}`}>
-                  {result === 'correct' ? 'せいかい！' : `ざんねん... 正解は${getFullName(current)}でした`}
+                  {result === 'correct' ? 'せいかい！' : `ざんねん... 正解は${getFullName(current)}のイラストでした`}
                   </span>
                 <button
                     onClick={handleNext}
@@ -279,10 +279,6 @@ export default function QuizPage() {
                   >
                     {currentIndex < quizList.length - 1 ? '次の問題へ' : '結果を見る'}
                   </button>
-
-                  <div className="row-span-2 text-left space-y-1 mx-auto">
-                    <p><strong>名前:</strong> {getFullName(current)}</p>                  
-                </div>
               </div>
             )}
           </div>
